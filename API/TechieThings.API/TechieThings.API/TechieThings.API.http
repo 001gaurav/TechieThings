@@ -1,6 +1,0 @@
-@TechieThings.API_HostAddress = http://localhost:5192
-
-GET {{TechieThings.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

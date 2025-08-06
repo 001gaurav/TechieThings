@@ -1,4 +1,9 @@
 
+using Microsoft.EntityFrameworkCore;
+using TechieThings.API.Data;
+using TechieThings.API.Repositories.Implementation;
+using TechieThings.API.Repositories.Interface;
+
 namespace TechieThings.API
 {
     public class Program
@@ -13,6 +18,14 @@ namespace TechieThings.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            //Inject DbContext in Application
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("TechieThingConnectionString"));
+            });
+
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             var app = builder.Build();
 
