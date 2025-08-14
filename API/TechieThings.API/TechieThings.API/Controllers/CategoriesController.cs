@@ -38,5 +38,27 @@ namespace TechieThings.API.Controllers
 
             return Ok(responce);
         }
+
+        // GET : https://localhost:7163/api/Categories
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await categoryRepository.GetAllAsync();
+
+            // Map Domain model to DTO
+            var responce = new List<CategoryDto>();
+            foreach (var category in categories)
+            {
+                responce.Add(new CategoryDto
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle
+                });
+            }
+
+            return Ok(responce);
+
+        }
     }
 }
